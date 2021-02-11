@@ -22,7 +22,8 @@ class OsController extends Controller{
             'logo' => 'required|file'
         ]);
 
-        $status = 0;
+        $status = 'danger';
+        $msg = '!Error! Error al ingresar el sistema operativo.';
 
         //Extraigo la extensión del archivo
         $extension = $request->file('logo')->extension();
@@ -34,21 +35,24 @@ class OsController extends Controller{
                 'os', $request->file('logo'), $response->id.'.'.$extension
             );
 
-            $status = 1 ;
+            $status = 'success';
+            $msg = '!Éxito! Se ha ingresado el sistema operativo correctamente.';
         }
 
-        return $this->index()->with('status', $status);
+        return redirect()->route('os')->with('status', $status)->with('msg', $msg);
     }
 
     public function delete(Os $os){
-        $status = 0;
+        $status = 'danger';
+        $msg = '!Error! Error al borrar el sistema operativo.';
 
-        if(isset($esqueleto)){
-            Os::destroy($os);
+        if(isset($os)){
+            $os->delete();
 
-            $status = 2 ;
+            $status = 'success';
+            $msg = '!Éxito! Se ha eliminado el sistema operativo.';
         }
 
-        return $this->index()->with('status', $status);
+        return redirect()->route('os')->with('status', $status)->with('msg', $msg);
     }
 }

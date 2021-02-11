@@ -17,8 +17,4 @@ class Os extends Model
 
         return $os;
     }
-
-    public static function destroy($os){
-        $os->destroy();
-    }
 }

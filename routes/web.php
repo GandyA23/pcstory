@@ -20,3 +20,21 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'os'], function() {
+    Route::get('/', "OsController@index")->name('os')->middleware('auth');
+    Route::post('/store', "OsController@store")->name('store-os')->middleware('auth');
+    Route::get('/destroy/{os}', "OsController@delete")->name('destroy-os')->middleware('auth');
+});
+
+Route::group(['prefix' => 'brand'], function() {
+    Route::get('/', "BrandController@index")->name('brand')->middleware('auth');
+    Route::post('/store', "BrandController@store")->name('store-brand')->middleware('auth');
+    Route::get('/destroy/{brand}', "BrandController@delete")->name('destroy-brand')->middleware('auth');
+});
+
+Route::group(['prefix' => 'computer'], function() {
+    Route::get('/', "ComputerController@index")->name('computer')->middleware('auth');
+    Route::post('/store', "ComputerController@store")->name('store-computer')->middleware('auth');
+    Route::get('/destroy/{brand}', "ComputerController@delete")->name('destroy-computer')->middleware('auth');
+});
