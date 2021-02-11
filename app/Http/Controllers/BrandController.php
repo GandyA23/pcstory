@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Os;
+use App\Brand;
 
 use Illuminate\Support\Facades\Storage; //Necesario para guardar la imagen
 use Illuminate\Http\Request;
 
-class OsController extends Controller{
-
+class BrandController extends Controller
+{
     public function index(){
-        $os = Os::all();
-        return view('os.view')->with('oses', $os);
+        $brand = Brand::all();
+        return view('brand.view')->with('brands', $brand);
     }
 
     // Reglas de validación: https://laravel.com/docs/7.x/validation#available-validation-rules
@@ -26,12 +26,12 @@ class OsController extends Controller{
 
         //Extraigo la extensión del archivo
         $extension = $request->file('logo')->extension();
-        $response = Os::store($request->name, $request->description, $extension);
+        $response = Brand::store($request->name, $request->description, $extension);
 
         if(!empty($response)){
-            //Guardar recibos de pago en el Storage
+            //Guardar recibbrand de pago en el Storage
             Storage::putFileAs(
-                'os', $request->file('logo'), $response->id.'.'.$extension
+                'brand', $request->file('logo'), $response->id.'.'.$extension
             );
 
             $status = 1 ;
@@ -40,11 +40,11 @@ class OsController extends Controller{
         return $this->index()->with('status', $status);
     }
 
-    public function delete(Os $os){
+    public function delete(Brand $brand){
         $status = 0;
 
         if(isset($esqueleto)){
-            Os::destroy($os);
+            Brand::destroy($brand);
 
             $status = 2 ;
         }
