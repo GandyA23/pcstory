@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', "ComputerController@index")->name('home');
+Route::get('/home', "ComputerController@index")->name('home')->middleware('auth');
 
 Route::group(['prefix' => 'os'], function() {
     Route::get('/', "OsController@index")->name('os')->middleware('auth');
