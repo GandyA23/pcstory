@@ -43,7 +43,7 @@
                                             <tr>
                                                 <td>{{ $brand->name }}</td>
                                                 <td>{{ $brand->description }}</td>
-                                                <td class="text-center"> <img src="{{env('APP_URL', '')}}/storage/app/brand/{{$brand->id}}.{{$brand->extension}}" class="img-fluid" width="40px" height="40px"> </td>
+                                                <td class="text-center"> <img src="{{env('APP_URL', '')}}/storage/app/brand/{{$brand->id}}.{{$brand->extension}}" class="img-fluid" width="100px" height="100px"> </td>
                                                 <td class="text-center">
                                                     <form class="form-horizontal" method="get" id="delete-brand" enctype="multipart/form-data" action="{{route('destroy-brand', '')}}/{{$brand->id}}" role="form">
                                                         @csrf

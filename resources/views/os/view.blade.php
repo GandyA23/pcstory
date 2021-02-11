@@ -43,7 +43,7 @@
                                             <tr>
                                                 <td>{{ $os->name }}</td>
                                                 <td>{{ $os->description }}</td>
-                                                <td class="text-center"> <img src="{{env('APP_URL', '')}}/storage/app/os/{{$os->id}}.{{$os->extension}}" class="img-fluid" width="40px" height="40px"> </td>
+                                                <td class="text-center"> <img src="{{env('APP_URL', '')}}/storage/app/os/{{$os->id}}.{{$os->extension}}" class="img-fluid" width="100px" height="100px"> </td>
                                                 <td class="text-center">
                                                     <form class="form-horizontal" method="get" id="delete-os" enctype="multipart/form-data" action="{{route('destroy-os', '')}}/{{$os->id}}" role="form">
                                                         @csrf
