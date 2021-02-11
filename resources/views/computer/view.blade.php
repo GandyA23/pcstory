@@ -49,7 +49,7 @@
                                         <td>{{ $computer->os->name }}</td>
                                         <td>{{ $computer->description }}</td>
                                         <td class="text-center"> <img src="{{env('APP_URL', '')}}/storage/app/computer/{{$computer->id}}.{{$computer->extension}}" class="img-fluid" width="40px" height="40px"> </td>
-                                        <td>
+                                        <td class="text-center">
                                         <form class="form-horizontal" method="get" id="delete-computer" enctype="multipart/form-data" action="{{route('destroy-computer', '')}}/{{$computer->id}}" role="form">
                                                 @csrf
                                                 <div class="modal-footer">
