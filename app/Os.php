@@ -18,15 +18,6 @@ class Os extends Model
         return $os;
     }
 
-    public static function updateOS($os, $name, $description, $extension){
-        $os->name = $name;
-        $os->description = $description;
-        $os->extension = $extension;
-        $os->save();
-
-        return $os;
-    }
-
     public static function destroy($os){
         $os->destroy();
     }

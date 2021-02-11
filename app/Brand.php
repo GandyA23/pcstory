@@ -18,15 +18,6 @@ class Brand extends Model
         return $brand;
     }
 
-    public static function updatebrand($brand, $name, $description, $extension){
-        $brand->name = $name;
-        $brand->description = $description;
-        $brand->extension = $extension;
-        $brand->save();
-
-        return $brand;
-    }
-
     public static function destroy($brand){
         $brand->destroy();
     }
