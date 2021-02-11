@@ -8,15 +8,8 @@
 
                 <div class="box">
                     <div class="box-header">
-                        {{--Botón Modal--}}
-                        <!-- Button trigger modal -->
-                        <br>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#os-modal-add">
-                            Nuevo Sistema Operativo
-                        </button>
 
                         @if ( session()->has('msg') && session()->has('status') )
-                            <br><br>
                             <div class="alert alert-{{session('status')}} alert-dismissible fade show" role="alert">
                                 {{session('msg')}}
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
@@ -28,35 +21,43 @@
                         @include('os.modal.add')
                     </div>
                     <div class="box-body">
-                        {{--Datatable--}}
-                        <br>
-                        <table id="os-datatable" class="table table-bordered w-100">
-                            <thead>
-                                <tr>
-                                    <th class="w-25 text-center">Nombre</th>
-                                    <th class="w-50 text-center">Descripción</th>
-                                    <th class="w-25 text-center">Imagen</th>
-                                    <th class="text-center">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($oses as $os)
-                                    <tr>
-                                        <td>{{ $os->name }}</td>
-                                        <td>{{ $os->description }}</td>
-                                        <td class="text-center"> <img src="{{env('APP_URL', '')}}/storage/app/os/{{$os->id}}.{{$os->extension}}" class="img-fluid" width="40px" height="40px"> </td>
-                                        <td class="text-center">
-                                            <form class="form-horizontal" method="get" id="delete-os" enctype="multipart/form-data" action="{{route('destroy-os', '')}}/{{$os->id}}" role="form">
-                                                @csrf
-                                                <div class="modal-footer">
-                                                    <button type="button" onclick="confirmar()" id="delete-os-button" class="submit-form btn btn-danger">Eliminar</button>
-                                                </div>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        <div class="card">
+                            <div class="card-header">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#os-modal-add">
+                                    Nuevo Sistema Operativo
+                                </button>
+                            </div>
+
+                            <div class="card-body">
+                                <table id="os-datatable" class="table table-bordered w-100">
+                                    <thead>
+                                        <tr>
+                                            <th class="w-25 text-center">Nombre</th>
+                                            <th class="w-50 text-center">Descripción</th>
+                                            <th class="w-25 text-center">Imagen</th>
+                                            <th class="text-center">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($oses as $os)
+                                            <tr>
+                                                <td>{{ $os->name }}</td>
+                                                <td>{{ $os->description }}</td>
+                                                <td class="text-center"> <img src="{{env('APP_URL', '')}}/storage/app/os/{{$os->id}}.{{$os->extension}}" class="img-fluid" width="40px" height="40px"> </td>
+                                                <td class="text-center">
+                                                    <form class="form-horizontal" method="get" id="delete-os" enctype="multipart/form-data" action="{{route('destroy-os', '')}}/{{$os->id}}" role="form">
+                                                        @csrf
+                                                        <div class="modal-footer">
+                                                            <button type="button" onclick="confirmar()" id="delete-os-button" class="submit-form btn btn-danger">Eliminar</button>
+                                                        </div>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
