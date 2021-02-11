@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', "ComputerController@index")->name('home');
 
 Route::group(['prefix' => 'os'], function() {
     Route::get('/', "OsController@index")->name('os')->middleware('auth');
@@ -36,5 +36,5 @@ Route::group(['prefix' => 'brand'], function() {
 Route::group(['prefix' => 'computer'], function() {
     Route::get('/', "ComputerController@index")->name('computer')->middleware('auth');
     Route::post('/store', "ComputerController@store")->name('store-computer')->middleware('auth');
-    Route::get('/destroy/{brand}', "ComputerController@delete")->name('destroy-computer')->middleware('auth');
+    Route::get('/destroy/{computer}', "ComputerController@delete")->name('destroy-computer')->middleware('auth');
 });

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Computer;
+use App\Os;
+use App\Brand;
 
 use Illuminate\Support\Facades\Storage; //Necesario para guardar la imagen
 use Illuminate\Http\Request;
@@ -10,8 +12,15 @@ use Illuminate\Http\Request;
 class ComputerController extends Controller
 {
     public function index(){
-        $computer = Computer::all();
-        return view('computer.view')->with('computers', $computer);
+        $computer = Computer::where('id', '>=', 1);
+        $computer = $computer->with('os')->with('brand');
+        $computer = $computer->get();
+        $oses = Os::all();
+        $brands = Brand::all();
+        return view('computer.view')
+            ->with('computers', $computer)
+            ->with('brands', $brands)
+            ->with('oses', $oses);
     }
 
     // Reglas de validación: https://laravel.com/docs/7.x/validation#available-validation-rules
@@ -24,7 +33,8 @@ class ComputerController extends Controller
             'logo' => 'required|file'
         ]);
 
-        $status = 0;
+        $status = 'danger';
+        $msg = '!Error! Error al ingresar la computadora.';
 
         //Extraigo la extensión del archivo
         $extension = $request->file('logo')->extension();
@@ -36,21 +46,24 @@ class ComputerController extends Controller
                 'computer', $request->file('logo'), $response->id.'.'.$extension
             );
 
-            $status = 1 ;
+            $status = 'success';
+            $msg = '!Éxito! Se ha ingresado la computadora.';
         }
 
-        return $this->index()->with('status', $status);
+        return redirect()->route('computer')->with('status', $status)->with('msg', $msg);
     }
 
-    public function delete(computer $computer){
-        $status = 0;
+    public function delete(Computer $computer){
+        $status = 'danger';
+        $msg = '!Error! Error al eliminar la computadora.';
 
-        if(isset($esqueleto)){
-            computer::destroy($computer);
+        if(isset($computer)){
+            $computer->delete();
 
-            $status = 2 ;
+            $status = 'success';
+            $msg = '!Éxito! Se ha eliminado la computadora.';
         }
 
-        return $this->index()->with('status', $status);
+        return redirect()->route('computer')->with('status', $status)->with('msg', $msg);
     }
 }

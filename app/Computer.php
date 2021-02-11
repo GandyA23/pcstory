@@ -8,6 +8,14 @@ class Computer extends Model
 {
     protected $table = 'computer';
 
+    public function os(){
+        return $this->hasOne('App\Os', 'id', 'os_id');
+    }
+
+    public function brand(){
+        return $this->hasOne('App\Brand', 'id', 'brand_id');
+    }
+
     public static function store($brand_id, $os_id, $model, $description, $extension){
         $computer = new computer();
         $computer->brand_id = $brand_id;
@@ -18,9 +26,5 @@ class Computer extends Model
         $computer->save();
 
         return $computer;
-    }
-
-    public static function destroy($computer){
-        $computer->destroy();
     }
 }
