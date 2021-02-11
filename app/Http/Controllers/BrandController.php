@@ -22,7 +22,8 @@ class BrandController extends Controller
             'logo' => 'required|file'
         ]);
 
-        $status = 0;
+        $status = 'danger';
+        $msg = '!Error! Error al ingresar la marca.';
 
         //Extraigo la extensión del archivo
         $extension = $request->file('logo')->extension();
@@ -34,21 +35,23 @@ class BrandController extends Controller
                 'brand', $request->file('logo'), $response->id.'.'.$extension
             );
 
-            $status = 1 ;
+            $status = 'success';
+            $msg = '!Éxito! Se ha ingresado la marca.';
         }
 
-        return $this->index()->with('status', $status);
+        return redirect()->route('brand')->with('status', $status)->with('msg', $msg);
     }
 
     public function delete(Brand $brand){
-        $status = 0;
+        $status = 'danger';
+        $msg = '!Error! Error al eliminar la marca.';
 
-        if(isset($esqueleto)){
-            Brand::destroy($brand);
-
-            $status = 2 ;
+        if(isset($brand)){
+            $brand->delete();
+            $status = 'success';
+            $msg = '!Éxito! Se ha eliminado la marca.';
         }
 
-        return $this->index()->with('status', $status);
+        return redirect()->route('brand')->with('status', $status)->with('msg', $msg);
     }
 }

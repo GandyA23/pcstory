@@ -15,7 +15,7 @@
 
                         <label for="os-description-add" class="control-label">Descripción</label>
                         <div class="col">
-                            <input type="text" name="description" required class="form-control" id="os-description-add" placeholder="Descripción">
+                            <textarea type="text" name="description" required class="form-control" id="os-description-add" placeholder="Descripción"></textarea>
                         </div>
 
                         <label for="os-logo-add" class="control-label">Logo</label>

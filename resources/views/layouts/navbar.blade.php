@@ -10,7 +10,7 @@
                 <a class="nav-link" href="{{-- route('computer') --}}">Computadoras<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{-- route('brand') --}}">Marcas</a>
+                <a class="nav-link" href="{{ route('brand') }}">Marcas</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('os') }}">Sistemas Operativos</a>

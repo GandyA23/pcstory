@@ -17,8 +17,4 @@ class Brand extends Model
 
         return $brand;
     }
-
-    public static function destroy($brand){
-        $brand->destroy();
-    }
 }
